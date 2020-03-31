@@ -18,9 +18,9 @@ public class DaoImpl implements Dao {
 	LdapHelper ldapHelper;
 
 	@Override
-	public LdapUser getUserDetailFromAd(String login, String password) {
+	public LdapUser getUserDetailFromAd(String email, String password) {
 		LdapUser ldapUser = null;
-		NamingEnumeration<SearchResult> result = ldapHelper.getLdapContext(login, password);
+		NamingEnumeration<SearchResult> result = ldapHelper.getLdapContext(email, password);
 		if (result != null) {
 			SearchResult searchResult = result.nextElement();
 			try {

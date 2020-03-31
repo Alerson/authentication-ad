@@ -13,8 +13,8 @@ public class ServiceImpl implements Service {
 	Dao dao;
 
 	@Override
-	public LdapUser getUserDetailFromAd(String login, String password) {
-		return dao.getUserDetailFromAd(login, password);
+	public LdapUser getUserDetailFromAd(String email, String password) {
+		return dao.getUserDetailFromAd(email, password);
 	}
 
 

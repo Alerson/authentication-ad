@@ -20,9 +20,9 @@ public class Controller {
 	@Autowired
 	Service service;
 
-	@PostMapping("/authenticate/{login}/{password}")
-	public ResponseEntity<?> loginUser(@PathVariable("login") String login, @PathVariable("password") String password){
-		LdapUser userDetail = service.getUserDetailFromAd(login, password);
+	@PostMapping("/authenticate/{email}/{password}")
+	public ResponseEntity<?> loginUser(@PathVariable("email") String email, @PathVariable("password") String password){
+		LdapUser userDetail = service.getUserDetailFromAd(email, password);
 		return userDetail != null ? ResponseEntity.ok(userDetail) : new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 	}
 

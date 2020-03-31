@@ -4,6 +4,6 @@ import com.authentication.model.LdapUser;
 
 public interface Dao {
 
-	public LdapUser getUserDetailFromAd(String login, String password);
+	public LdapUser getUserDetailFromAd(String email, String password);
 
 }

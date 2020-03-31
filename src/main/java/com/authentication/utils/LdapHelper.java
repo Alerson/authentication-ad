@@ -24,13 +24,13 @@ public class LdapHelper {
 	@Value("${spring.ldap.search}")
 	private String LDAP_BASE_SEARCH;
 
-	public NamingEnumeration<SearchResult> getLdapContext(String login, String password) {
+	public NamingEnumeration<SearchResult> getLdapContext(String email, String password) {
 		NamingEnumeration<SearchResult> results = null;
 		Hashtable<String, String> env = new Hashtable<String, String>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
 		env.put(Context.PROVIDER_URL, LDAP_URL);
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
-		env.put(Context.SECURITY_PRINCIPAL, login);
+		env.put(Context.SECURITY_PRINCIPAL, email);
 		env.put(Context.SECURITY_CREDENTIALS, password);
 
 		// Create the initial context
@@ -39,7 +39,7 @@ public class LdapHelper {
 			SearchControls searchControls = new SearchControls();
 			searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 			ctx = new InitialDirContext(env);
-			results = ctx.search(LDAP_BASE_SEARCH + "," + LDAP_BASE_DN, "(&(userPrincipalName=" + login + ")(objectclass=user))", searchControls);
+			results = ctx.search(LDAP_BASE_SEARCH + "," + LDAP_BASE_DN, "(&(userPrincipalName=" + email + ")(objectclass=user))", searchControls);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
