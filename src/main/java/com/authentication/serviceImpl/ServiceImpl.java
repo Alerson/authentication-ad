@@ -18,16 +18,20 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public LdapUser getUserDetailFromAd(String login, String password) {
-		LdapUser ldapUser = new LdapUser();
+		LdapUser ldapUser = null;
 		NamingEnumeration<SearchResult> result = ldapHelper.getLdapContext(login, password);
 		if (result != null) {
 			SearchResult searchResult = result.nextElement();
 			try {
+				ldapUser = new LdapUser();
 				ldapUser.setFirstName(searchResult.getAttributes().get("givenName").get().toString());
 				ldapUser.setFirstNameAndLastName(searchResult.getAttributes().get("name").get().toString());
 				ldapUser.setEmailAddress(searchResult.getAttributes().get("userPrincipalName").get().toString());
 				ldapUser.setDepartment(searchResult.getAttributes().get("department").get().toString());
 				ldapUser.setCompany(searchResult.getAttributes().get("company").get().toString());
+				String memberOf = searchResult.getAttributes().get("memberof").get(5).toString();
+				String groupName = memberOf.substring(memberOf.indexOf("cn=") + 4, memberOf.indexOf(","));
+				ldapUser.setGroupName(groupName);
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}

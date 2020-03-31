@@ -21,5 +21,6 @@ public class LdapUser implements Serializable {
 	private String emailAddress;
 	private String department;
 	private String company;
+	private String groupName;
 
 }
