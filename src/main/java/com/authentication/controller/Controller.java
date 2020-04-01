@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.authentication.constants.ApiConstants;
 import com.authentication.model.LdapUser;
 import com.authentication.service.Service;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping(path = ApiConstants.BASE_URL)
 public class Controller {
 
 	@Autowired
